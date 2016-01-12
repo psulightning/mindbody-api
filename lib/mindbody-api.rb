@@ -1,5 +1,6 @@
 require 'active_support/inflector'
 require 'active_support/core_ext/array/extract_options'
+require 'active_support/time'
 
 require 'mindbody-api/version'
 require 'mindbody-api/models'

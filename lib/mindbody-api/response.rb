@@ -82,7 +82,7 @@ module MindBody
           elsif value.is_a?(DateTime) || value.is_a?(Time)
             time = value.to_s
             time.gsub!(/\+\d\d:\d\d/,"")
-            hash[key]=Time.parse(time)
+            hash[key]=Time.zone.parse(time)
           end
         end
 
