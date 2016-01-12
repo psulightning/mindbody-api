@@ -1,5 +1,6 @@
 require 'active_support/inflector'
 require 'active_support/core_ext/array/extract_options'
+require 'active_support/time'
 
 require 'mindbody-api/version'
 require 'mindbody-api/models'
@@ -25,6 +26,7 @@ module MindBody
       @source_name = ENV['MINDBODY_SOURCE_NAME'] || ''
       @source_key = ENV['MINDBODY_SOURCE_KEY'] || ''
       @site_ids = (ENV['MINDBODY_SITE_IDS'] || '').scan(/-?\d+/).map(&:to_i)
+      Time.zone = (ENV['MINDBODY_TIMEZONE']) || "UTC"
     end
 
     # Make sure site_ids is always an Array

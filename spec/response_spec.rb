@@ -15,6 +15,7 @@ describe MindBody::Services::Response do
         :int_list => {
           :int => [1,2,3,4,5,6]
         },
+        :datetime => Time.parse("2016-01-12 14:54:34 +0000").utc,
         :staff_members => {},
         :organizer => {},
         :purchases => {},
@@ -25,6 +26,7 @@ describe MindBody::Services::Response do
   }
 
   before :each do
+    Time.zone = "Eastern Time (US & Canada)"
     resp = double('response')
     resp.stub(:to_hash).and_return(RESPONSE_HASH)
     @response = MindBody::Services::Response.new resp
@@ -110,6 +112,10 @@ describe MindBody::Services::Response do
 
     it 'should return nil for a nil entry' do
       expect(subject.result[:visits]).to be(nil)
+    end
+    
+    it "should convert Time object to local time zone" do
+      expect(subject.result[:datetime]).to eq(Time.zone.parse("2016-01-12 14:54:34 +0000"))
     end
   end
 end
